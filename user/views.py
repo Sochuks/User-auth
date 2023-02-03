@@ -26,37 +26,38 @@ def register(request):
 
         myUser.save()
         messages.success(request, f'Hi {username}, your account was created successfully.')
-        return redirect('index')
+        return redirect('signin_user')
 
     return render (request, "user/register.html")
 
-# Signin function
-def sign_in(request):
-    if request.user.is_authenticated:
-        return render (request, "user/user.html")
-    else:
-        messages.info(request, 'Kindly login to view this page')
-        return HttpResponseRedirect('signin')
+# Create Sign In view
 
-# Create User Sign In  view
-def sign_in_user(request):
-    if request == "POST":
-        uname = request.POST['username']
+# Create User Sign In view
+def signin_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
         pass1 = request.POST['pass_one']
 
-        user = authenticate(username=uname, passowrd=pass1)
+        user = authenticate(username=username, password=pass1)
 
         if user is not None:
             login(request, user)
             f_name = user.first_name
             return render (request, "user/user.html", {
-                "fname":f_name
+                'fname': f_name
             })
         else:
             messages.error(request, "Invalid Account Credentials")
-            return HttpResponseRedirect('signin')
+            return HttpResponseRedirect('signin_user')
 
     return render (request, "user/login.html")
+
+# Signout User
+def sign_out(request):
+    logout(request)
+    request.user = None
+    messages.info(request, "You are successfully logged out")
+    return HttpResponseRedirect('signin_user')
 
 # Create user admin view
 def user_admin(request):
@@ -64,4 +65,6 @@ def user_admin(request):
 
 # Create guest user view
 def user_guest(request):
-    return render(request, "user/user.html")
+    return render (request, "user/user.html")
+
+

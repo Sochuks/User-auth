@@ -6,10 +6,11 @@
 <!-- Page body -->
 {% block body %}
 
-<h1>Welcome home {{fname}}</h1>
+
+<h1>Welcome home {{ fname }}</h1>
 
 <button>
-    <a href="">Logout</a>
+    <a href="{% url 'signout' %}">Logout</a>
 </button>
 
     

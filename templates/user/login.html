@@ -8,21 +8,17 @@
 
 <h1>User Login</h1>
 
-
-{% if messages %}
     
     {% for message in messages %}
         <div class="alert alert-{{message.tags}}">{{message}}</div>
     {% endfor %}
-
-{% endif %}
     
 
 <!-- form container -->
 <div class="container">
 
     <!-- form -->
-    <form action="{% url 'signin' %}" method="post">
+    <form action="{% url 'signin_user' %}" method="post">
         <!-- csrf token -->
         {% csrf_token %}
 
@@ -30,8 +26,12 @@
         <input type="text" name="username" id="username"><br>
 
         
-        <label for="">Username</label><br>
-        <input type="password" name="pass_one" id="pass_one"><br>
+        <label for="">Password</label><br>
+        <input type="password" name="pass_one" id="pass_one"><br><br>
+
+        <button type="submit">
+            Sign In
+        </button>
 
     </form>
 </div>
