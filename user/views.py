@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 
 # Create your views here.
 def index(request):
@@ -27,6 +29,12 @@ def register(request):
 
 # Create User Sign In  view
 def sign_in(request):
+    if request == "POST":
+        uname = request.POST['username']
+        pass1 = request.POST['pass_one']
+
+        authenticate(username=uname, passowrd=pass1)
+
     return render (request, "user/login.html")
 
 # Create user admin view
