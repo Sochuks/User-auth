@@ -12,7 +12,7 @@
 <div class="container">
 
     <!-- form -->
-    <form action="" method="post">
+    <form action="{% url 'register' %}" method="post">
         <!-- csrf token -->
         {% csrf_token %}
 
@@ -33,7 +33,7 @@
 
         
         <label for="">Confirm your Password</label><br>
-        <input type="text" name="pass_two" id="pass_two"><br><br>
+        <input type="password" name="pass_two" id="pass_two"><br><br>
 
         <button type="submit">
             Register
