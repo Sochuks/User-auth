@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
@@ -20,11 +20,14 @@ def register(request):
         username = myUser.username
 
         myUser.save()
-        
         messages.success(request, f'Hi {username}, your account was created successfully.')
         return redirect('index')
 
     return render (request, "user/register.html")
+
+# Create User Sign In  view
+def sign_in(request):
+    return render (request, "user/login.html")
 
 # Create user admin view
 def user_admin(request):

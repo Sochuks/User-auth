@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+<!-- Page title -->
+{% block title %}  Login  {% endblock title %} 
+
+<!-- Page body -->
+{% block body %}
+
+<h1>User Login</h1>
+
+
+{% if messages %}
+    
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{message}}</div>
+    {% endfor %}
+
+{% endif %}
+    
+
+<!-- form container -->
+<div class="container">
+
+    <!-- form -->
+    <form action="{% url 'signin' %}" method="post">
+        <!-- csrf token -->
+        {% csrf_token %}
+
+        <label for="">Username</label><br>
+        <input type="text" name="username" id="username"><br>
+
+        
+        <label for="">Username</label><br>
+        <input type="password" name="pass_one" id="pass_one"><br>
+
+    </form>
+</div>
+    
+{% endblock body %}
