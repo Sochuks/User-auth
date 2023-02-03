@@ -13,14 +13,16 @@ def index(request):
 # Register user view
 def register(request):
     if request.method == "POST":
-        fname = request.POST['full_name']
+        fname = request.POST['first_name']
+        lname = request.POST['last_name']
         username = request.POST['username']
         email = request.POST['email']
         pass1 = request.POST['pass_one']
         pass2 = request.POST['pass_two']
 
-        myUser = User.objects.create_user(fname, email, pass1)
-        username = myUser.username
+        myUser = User.objects.create_user(username, email, pass1)
+        myUser.first_name = fname
+        myUser.last_name = lname
 
         myUser.save()
         messages.success(request, f'Hi {username}, your account was created successfully.')
@@ -34,7 +36,7 @@ def sign_in(request):
         return render (request, "user/user.html")
     else:
         messages.info(request, 'Kindly login to view this page')
-        return HttpResponseRedirect('index')
+        return HttpResponseRedirect('signin')
 
 # Create User Sign In  view
 def sign_in_user(request):
@@ -43,6 +45,16 @@ def sign_in_user(request):
         pass1 = request.POST['pass_one']
 
         user = authenticate(username=uname, passowrd=pass1)
+
+        if user is not None:
+            login(request, user)
+            f_name = user.first_name
+            return render (request, "user/user.html", {
+                "fname":f_name
+            })
+        else:
+            messages.error(request, "Invalid Account Credentials")
+            return HttpResponseRedirect('signin')
 
     return render (request, "user/login.html")
 

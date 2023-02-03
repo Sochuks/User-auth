@@ -10,5 +10,5 @@ urlpatterns = [
 
     # User SignUp, SignIn & SignOut
     path('register', views.register, name = "register"),
-    path('sign_in', views.sign_in, name = "signin"),
+    path('signin', views.sign_in, name = "signin"),
 ]
