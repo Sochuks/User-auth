@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from . models import createUser
-from . forms import regForm
+# from . models import createUser
+# from . forms import regForm
 
 # Create your views here.
 def index(request):

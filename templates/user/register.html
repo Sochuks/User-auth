@@ -7,5 +7,40 @@
 {% block body %}
 
 <h1>Create User Home</h1>
+
+<!-- form container -->
+<div class="container">
+
+    <!-- form -->
+    <form action="" method="post">
+        <!-- csrf token -->
+        {% csrf_token %}
+
+        <label for="">Full name</label><br>
+        <input type="text" name="full_name" id="full_name"><br>
+
+        
+        <label for="">Username</label><br>
+        <input type="text" name="username" id="username"><br>
+
+        
+        <label for="">Email</label><br>
+        <input type="email" name="email" id="email"><br>
+
+        
+        <label for="">Password</label><br>
+        <input type="password" name="pass_one" id="pass_one"><br>
+
+        
+        <label for="">Confirm your Password</label><br>
+        <input type="text" name="pass_two" id="pass_two"><br><br>
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+</div>
     
 {% endblock body %}
