@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -27,13 +28,21 @@ def register(request):
 
     return render (request, "user/register.html")
 
-# Create User Sign In  view
+# Signin function
 def sign_in(request):
+    if request.user.is_authenticated:
+        return render (request, "user/user.html")
+    else:
+        messages.info(request, 'Kindly login to view this page')
+        return HttpResponseRedirect('index')
+
+# Create User Sign In  view
+def sign_in_user(request):
     if request == "POST":
         uname = request.POST['username']
         pass1 = request.POST['pass_one']
 
-        authenticate(username=uname, passowrd=pass1)
+        user = authenticate(username=uname, passowrd=pass1)
 
     return render (request, "user/login.html")
 
