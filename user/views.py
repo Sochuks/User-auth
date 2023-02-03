@@ -31,6 +31,12 @@ def register(request):
     return render (request, "user/register.html")
 
 # Create Sign In view
+def signin(request):
+    if request.user.is_authenticated:
+        return render (request, "user/user.html")
+    else:
+        messages.info(request, "You need an account to proceed")
+        return HttpResponseRedirect('index')
 
 # Create User Sign In view
 def signin_user(request):
@@ -64,6 +70,7 @@ def user_admin(request):
     return render (request, "user/admin.html")
 
 # Create guest user view
+@login_required(login_url='signin')
 def user_guest(request):
     return render (request, "user/user.html")
 
