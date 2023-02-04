@@ -12,6 +12,9 @@
     <title>{% block title %} Home - User Authentication App {% endblock title %}</title>
     <!-- TailwindCSS -->
     {% tailwind_css %}
+    <!-- Flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -19,5 +22,12 @@
 
     {% endblock body %}
     
+    <!-- Scripts arena -->
+    
+    {% block scripts %}
+        <!-- Flowbite -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    {% endblock scripts %}
+        
 </body>
 </html>

@@ -10,7 +10,7 @@ urlpatterns = [
 
     # User SignUp, SignIn & SignOut
     path('register', views.register, name = "register"),
-    # path('signin/', views.sign_in, name = "signin"),
+    path('signin', views.signin, name = "signin"),
     path('signin_user', views.signin_user, name = "signin_user"),
     path('signout', views.sign_out, name = "signout"),
 ]
