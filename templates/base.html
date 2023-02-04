@@ -10,6 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Home - User Authentication App {% endblock title %}</title>
+    <!--Box Icons styles -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <!-- TailwindCSS -->
     {% tailwind_css %}
     <!-- Flowbite -->
@@ -51,7 +53,7 @@
       {% else %}
       <div class="flex items-center space-x-2">
         <!--Button-->
-      <a href="" class="py-2 px-4 pt-2 text-white bg-primaryCol rounded-md baseline hover:bg-secCol hidden md:block">
+      <a class="py-2 px-4 pt-2 text-white bg-primaryCol rounded-md baseline cursor-pointer hover:bg-secCol hidden md:block" id="open-btn">
         Login
       </a>
       <!--Button-->
@@ -81,12 +83,62 @@
         <a class="hover:text-darkGrayBlue" href="">Services</a>
         <a class="hover:text-darkGrayBlue" href="">Log out</a>
         {% else %}
-        <a class="hover:text-darkGrayBlue" href="">Login</a>
+        <a class="hover:text-darkGrayBlue" id="open-btn">Login</a>
         <a class="hover:text-darkGrayBlue" href="">Sign Up</a>
         {% endif %}
     </nav>
   
   </header>
+
+    <!-- Login Modal -->
+            <div class="fixed hidden insert-0 bg-black w-full h-full bg-opacity-50 z-10" id="modal">
+
+                <div class="relative mx-auto w-96 md:w-1/2 lg:w-1/3 z-20 m-8 shadow-lg top-20 bg-white rounded-lg p-8" >
+                    <div class="mt-2">
+                        <div class="flex justify-end mb-6">
+                            <button>
+                               <a href="" id="close-btn">
+                                <span class="mr-2">Close</span>
+                                <span>
+                                    <i class="bx bx-x-circle"></i>
+                                </span>
+                               </a> 
+                            </button>
+                        </div>
+        
+                        <h1 class="text-center text-2xl text-primaryCol">Login</h1>
+        
+                        <form action="{% url 'signin_user' %}" class="pt-6 pb-2 my-2" method="post" autocomplete="off">
+                            <!-- csrf_token -->
+                            {% csrf_token %}
+    
+                            <div class="mb-4">
+                                <label class="block text-sm font-bold mb-2" for="username">
+                                    Username
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" name="username" id="username" type="text" placeholder="Enter Username">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-sm font-bold mb-2" for="password">
+                                    Password
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3" name="pass_one" id="pass_one" type="password" placeholder="Password">
+                            </div>
+                            <div class="block md:flex items-center justify-between">
+                                <div>
+                                    <button class="bg-green-500 hover:bg-green-800 text-white font-bold py-2 px-4 rounded border-b-4 border-b-green-900" type="submit">
+                                        Sign In
+                                    </button>
+                                </div>
+        
+                                <div class="mt-4 md:mt-0">
+                                    <a href="#" class="text-green no-underline">Forget Password?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
     {% block body %}
 
@@ -114,6 +166,8 @@
 
     <!-- Scripts arena -->
     {% block scripts %}
+        <!-- Site Script -->
+        <script src="{% static 'js/app.js' %}"></script>
         <!-- Flowbite -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     {% endblock scripts %}
