@@ -71,6 +71,7 @@ def user_admin(request):
 
 # Create guest user view
 @login_required(login_url="signin")
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def user_guest(request):
     return render (request, "user/user.html")
 
