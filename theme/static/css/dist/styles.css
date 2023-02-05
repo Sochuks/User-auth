@@ -1115,8 +1115,18 @@ select {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-blue-300 {
+  --tw-gradient-from: #93c5fd;
+  --tw-gradient-to: rgb(147 197 253 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .to-primaryCol {
   --tw-gradient-to: hsla(234, 100%, 66%, 1);
+}
+
+.to-blue-600 {
+  --tw-gradient-to: #2563eb;
 }
 
 .p-4 {

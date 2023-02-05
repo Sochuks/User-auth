@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -65,9 +67,10 @@ def sign_out(request):
     messages.info(request, "You are successfully logged out")
     return HttpResponseRedirect('signin_user')
 
-# Create user admin view
-def user_admin(request):
-    return render (request, "user/admin.html")
+# Create user admin view with login required and cache control using CBV
+class user_admin(LoginRequiredMixin, TemplateView):
+    template_name = "user/admin.html"
+    login_url = "signin"
 
 # Create guest user view
 @login_required(login_url="signin")
