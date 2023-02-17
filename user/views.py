@@ -51,7 +51,6 @@ def signin_user(request):
         if user is not None:
             login(request, user)
             f_name = user.first_name
-            messages.success(request, "Registration Success add credentials to proceed")
             return render (request, "user/user.html", {
                 'fname': f_name
             })
